@@ -65,11 +65,7 @@ bool remove(QUEUE* Q){
     int i = 0;
     int element = Q->CONTENT[0].num;
 
-    for(i;i<Q->numReg;i++){
-        if(Q->numReg > 0 && Q->numReg < MAX ){
-            Q->CONTENT[i].num = Q->CONTENT[i+1].num;  
-        }
-    }
+    front++;
 
     printf("The first element %i in the Queue was removed\n", element);
     Q->numReg --;
@@ -84,7 +80,7 @@ void showQueue(QUEUE* Q){
     if(isEmpty(Q)){
         printf("The Queue is empty!\n");
     }else{
-        int i = 0;
+        int i = front;
         for(i;i<Q->numReg;i++){
             printf("Value in queue: %i\n", Q->CONTENT[i].num);
         }
