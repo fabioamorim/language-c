@@ -4,6 +4,20 @@
 int main()
 {
 
+    /*
+        Advantages of Arrays
+            - Simple and easy to use;
+            - Faster access to the elements (constant access).
+        Disavantages of Arrays
+            - Prellocates all needed memory up front and wates memory space for indices in 
+                the array that are empty.
+            - Fized size: THe size of the array is static (specify the array size before using it).
+            - Complex position-based insertion: To insert an element at a given position, we may
+                need to shift the existing elements. This will create a position for us to insert
+                the new element at the deisred position. If the position at which we want to add
+                an element is at the beginning, then the shifting operation is more expensive.
+    */
+
     int vetor[5] = {1,2,3,4,5};
     int matriz[3][3];
     int i, j;
