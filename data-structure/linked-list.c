@@ -46,12 +46,22 @@ void showAllElements(LIST l){
     printf(" ]");
 }
 
-void insertElement(LIST *l, int value){
+void insertInHead(LIST *l, int value){
 
     NODE *node = (NODE*)malloc(sizeof(NODE));
     node->value = value;
     node->next = l->head;
     l->head = node; 
+}
+
+void insertInTail(LIST *l, int value){
+
+    NODE *node = (NODE*)malloc(sizeof(NODE));
+    struct list p = *l;
+
+    node->value = value;
+    node->next = NULL;
+
 }
 
 void removeElement(LIST *l){
@@ -84,38 +94,19 @@ int main(){
     LIST list;
 
     initialize(&list);
-    printf("%d\n", sizeOfList(list));
-    insertElement(&list, 12);
-    insertElement(&list, 13);
-    printf("%d\n", sizeOfList(list));
-    insertElement(&list, 22);
-    insertElement(&list, 5);
-    insertElement(&list, 100);
-    insertElement(&list, 188);
-    insertElement(&list, 199);
-    insertElement(&list, 1);
-    insertElement(&list, 23);
-    insertElement(&list, 90);
 
-    showAllElements(list);
-
-    removeElement(&list);
-
-    printf("\n\n");
-
-    showAllElements(list);
-
-    removeElement(&list);
-
-    printf("\n\n");
+    insertInHead(&list, 12);
+    insertInHead(&list, 13);
+    insertInHead(&list, 22);
+    insertInHead(&list, 33);
 
     showAllElements(list);
 
     printf("\n\n");
 
-    //removeAllElements(&list);
+    insertInTail(&list, 200);
 
-    removeElementByValue(&list, 1999);
+    showAllElements(list);
 
     return 0;
 }
