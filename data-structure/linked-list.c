@@ -3,11 +3,13 @@
 #include <malloc.h>
 
 /*
-    Insert elements;
-    Delete element and return the position;
+    Insert element in the head;
+    Insert element in the tail;
+    Remove element in the head;
+    Remove element in the tail;
     Remove all elements in the list;
     Return the size of the list;
-    Remove all elements in the list;
+    Return the position of element is searching.
 */
 
 typedef struct node{
@@ -19,14 +21,18 @@ typedef NODE* pont;
 
 typedef struct list{
     pont head;
+    pont tail;
 }LIST;
 
-void initialize(LIST *list){
-    list->head = NULL;
+void initialize(LIST *l){
+    l->tail = NULL;
+    l->head = NULL;
 }
 
 int sizeOfList(LIST l){
     int size = 0;
+
+    if (l.head==NULL) return size;
 
     while(l.head!=NULL){
         size++;
@@ -37,36 +43,75 @@ int sizeOfList(LIST l){
 }
 
 void showAllElements(LIST l){
+    
+    if(sizeOfList(l)==0)
+        printf("The list is empty!");
+    else{
+       
+        printf("[ ");    
+       
+        while(l.head!=NULL){
+            printf("%d ", l.head->value);
+         l.head = l.head->next;
+        }
+        
+        printf(" ]");
 
-    printf("[ ");
-    while(l.head!=NULL){
-        printf("%d ", l.head->value);
-        l.head = l.head->next;
     }
-    printf(" ]");
 }
 
 void insertInHead(LIST *l, int value){
 
     NODE *node = (NODE*)malloc(sizeof(NODE));
     node->value = value;
-    node->next = l->head;
-    l->head = node; 
+
+    if(sizeOfList(*l)==0){
+        l->tail = node;
+        l->tail->next = NULL;
+        l->head = l->tail;
+    }else{
+        node->next = l->head;
+        l->head = node;
+    }
 }
 
 void insertInTail(LIST *l, int value){
 
+    LIST p = *l;
     NODE *node = (NODE*)malloc(sizeof(NODE));
-    struct list p = *l;
 
     node->value = value;
-    node->next = NULL;
+
+    while(p.head!=NULL){
+        if(p.head->next==p.tail){
+            p.head->next = p.tail;
+            l->tail = node;
+            l->tail->next = NULL;
+            p.head->next->next = l->tail;
+            break;
+        }
+        p.head = p.head->next;
+    }
 
 }
 
-void removeElement(LIST *l){
+void removeElementInHead(LIST *l){
     if(l->head!=NULL)
         l->head = l->head->next;
+}
+
+void removeElementInTail(LIST *l){
+    LIST p = *l;
+
+    while(p.head!=NULL){
+        if(p.head->next==p.tail){
+            p.tail = p.head;
+            p.tail->next = NULL;
+            l->tail = p.tail;
+            break;
+        }
+        p.head = p.head->next;
+    }
 }
 
 void removeAllElements(LIST *l){
@@ -94,19 +139,45 @@ int main(){
     LIST list;
 
     initialize(&list);
+    showAllElements(list);
+    printf("\n");
+    printf("Size of list: %d\n", sizeOfList(list));
 
     insertInHead(&list, 12);
+    showAllElements(list);
+    printf("\n");
+    printf("Size of list: %d\n", sizeOfList(list));
+    
     insertInHead(&list, 13);
+    showAllElements(list);
+    printf("\n");
+    printf("Size of list: %d\n", sizeOfList(list));
+
     insertInHead(&list, 22);
+    showAllElements(list);
+    printf("\n");
+    printf("Size of list: %d\n", sizeOfList(list));
+
     insertInHead(&list, 33);
-
+    //insertInTail(&list, 88);
     showAllElements(list);
+    printf("\n");
+    printf("Size of list: %d\n", sizeOfList(list));
 
-    printf("\n\n");
-
-    insertInTail(&list, 200);
-
+    insertInTail(&list, 88);
     showAllElements(list);
+    printf("\n");
+    printf("Size of list: %d\n", sizeOfList(list));
 
+    removeElementInHead(&list);
+    showAllElements(list);
+    printf("\n");
+    printf("Size of list: %d\n", sizeOfList(list));
+
+    removeElementInTail(&list);
+    showAllElements(list);
+    printf("\n");
+    printf("Size of list: %d\n", sizeOfList(list));
+    
     return 0;
 }
