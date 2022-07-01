@@ -20,8 +20,8 @@ typedef struct node{
 typedef NODE* pont;
 
 typedef struct list{
-    pont head;
-    pont tail;
+    pont head; // the first element in the list
+    pont tail; // the last element in the list
 }LIST;
 
 void initialize(LIST *l){
