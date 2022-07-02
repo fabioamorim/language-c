@@ -14,9 +14,17 @@ void func(int n){
     }
 }
 
+void recursionTree(int n){
+    if(n>0){
+        printf("%d\n", n);
+        recursionTree(n-1);
+        recursionTree(n-1);
+    }
+}
+
 int main(){
 
-    int start = 10, end = 20;
+    int start = 3, end = 20;
 /*  
     Iterative way
     for(int i=start;i<=end;i++)
@@ -27,7 +35,7 @@ int main(){
     // recursive way
     // printNumbers(start, end);
 
-    func(start);
+    recursionTree(start);
 
     return 0;
 }
