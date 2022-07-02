@@ -22,6 +22,13 @@ void recursionTree(int n){
     }
 }
 
+int factorial(int n){
+
+    if(n==0) return 1;
+    else if(n>0) return factorial(n-1)*n;
+    
+}
+
 int main(){
 
     int start = 3, end = 20;
@@ -37,5 +44,7 @@ int main(){
 
     recursionTree(start);
 
+    printf("factorial: %d", factorial(5));
+    
     return 0;
 }
