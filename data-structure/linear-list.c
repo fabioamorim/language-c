@@ -71,16 +71,17 @@ bool deleteElement(LISTA* l, REGISTER reg){
     return true;
 }
 
-bool deleteElementPosition(LISTA* l, int pos){
+int deleteElementPosition(LISTA* l, int pos){
     
     if(l->nrElem==0 || pos > l->nrElem)
-        return false;
+        return 0;
 
+    int x = l->list[pos].value;
     for(int i = pos;pos<=l->nrElem;pos++)
         l->list[pos].value = l->list[pos+1].value;
 
     l->nrElem--;
-    return true;
+    return x;
 
 }
 
@@ -138,7 +139,7 @@ int main(){
 
     showList(&l);
 
-    deleteElementPosition(&l, 5);
+    printf("Was deleted: %d\n",deleteElementPosition(&l, 2));
 
     showList(&l);
 
