@@ -78,22 +78,50 @@ int Delete(struct Array *arr, int index){
     return -1;
 }
 
+bool IsSorted(struct Array arr){
+    for(int i=0;i<arr.length-1;i++)
+        if(arr.A[i]>arr.A[i+1]) return false;
+    
+    return true;
+}
+
+void SimpleSort(struct Array *arr){
+
+    if(IsEmpty(*arr)==false){
+
+        if(IsSorted(*arr)==false){
+
+            /* 
+                If the array already sorted, it does not execute the for loop.
+                So it doesn't waste resources.
+            */
+
+            for(int i=0;i<arr->length;i++){
+
+                for(int j=0;j<arr->length;j++){
+                    if(arr->A[i]<arr->A[j]){
+                        int temp=arr->A[i];
+                        arr->A[i]=arr->A[j];
+                        arr->A[j]=temp;
+                    }
+                }
+            }
+        }
+    }
+}
+
 int main(){
 
     struct Array arr ={{},10,0};
 
-    Insert(&arr,0,10);
-    printf("Number was removed: %d\n", Delete(&arr,0));
-    Display(arr);
-    Insert(&arr,0,20);
-    Display(arr);
-    Insert(&arr,1,30);
-    Insert(&arr,2,40);
+    Insert(&arr,0,99);
+    Insert(&arr,1,88);
+    Insert(&arr,2,100);
     Insert(&arr,3,50);
-    Insert(&arr,4,60);
-    printf("Number was removed: %d\n", Delete(&arr,1));
+    Insert(&arr,4,22);
     Display(arr);
-
+    SimpleSort(&arr);
+    Display(arr);
 
     return 0;
 }
