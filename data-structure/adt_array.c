@@ -48,6 +48,23 @@ void Display(struct Array arr){
     printf("\n");
 }
 
+int Delete(struct Array *arr, int index){
+
+    if(IsEmpty(*arr)) return -1;
+    int x=0;
+
+    if(index>=0 && index<arr->length){
+        x=arr->A[index];
+        for(int i=index;i<arr->length-1;i++){
+            arr->A[i]=arr->A[i+1];
+        }
+        arr->length--;
+        return x;
+    }
+
+    return -1;
+}
+
 void Insert(struct Array *arr, int index, int value){
     
     if(index>=0 && index <= arr->length){
@@ -63,13 +80,18 @@ int main(){
 
     struct Array arr ={{},10,0};
 
-    Display(arr);
     Insert(&arr,0,10);
+    printf("Number was removed: %d\n", Delete(&arr,0));
     Display(arr);
-    Insert(&arr,1,20);
+    Insert(&arr,0,20);
     Display(arr);
-    Insert(&arr,2,30);
+    Insert(&arr,1,30);
+    Insert(&arr,2,40);
+    Insert(&arr,3,50);
+    Insert(&arr,4,60);
+    printf("Number was removed: %d\n", Delete(&arr,1));
     Display(arr);
-    
+
+
     return 0;
 }
