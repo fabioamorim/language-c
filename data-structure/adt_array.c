@@ -9,6 +9,7 @@
     Is an Array implementation with functions:
 
     Array structure:
+    
     -Array space;
     -Total sice;
     -Current lenght
@@ -18,8 +19,9 @@
     bool IsEmpty(struct Array arr); - return true if array is empty and false is exists data. 
     bool IsFull(struct Array arr) - return true if there is not space to add new data and false is exists space.
     void Display(strcut Array arr) - show all elements in array. 
-    void Insert(struct Array arr, int index, int value)- Add new value in array, passing the value and the index.
-
+    void Insert(struct Array *arr, int index, int value)- Add new value in array, passing the value and the index.
+    void Delete(struct Arra *arr, int index) - Delete a value in array by index, return the value was removed, or
+        return -1 if was not possible remove the value.
 
 */
 
@@ -48,6 +50,17 @@ void Display(struct Array arr){
     printf("\n");
 }
 
+void Insert(struct Array *arr, int index, int value){
+    
+    if(index>=0 && index <= arr->length){
+
+        for(int i=arr->length;i>index;i++)
+            arr->A[i]=arr->A[i-1];
+        arr->A[index]=value;
+        arr->length++;
+    }
+}
+
 int Delete(struct Array *arr, int index){
 
     if(IsEmpty(*arr)) return -1;
@@ -63,17 +76,6 @@ int Delete(struct Array *arr, int index){
     }
 
     return -1;
-}
-
-void Insert(struct Array *arr, int index, int value){
-    
-    if(index>=0 && index <= arr->length){
-
-        for(int i=arr->length;i>index;i++)
-            arr->A[i]=arr->A[i-1];
-        arr->A[index]=value;
-        arr->length++;
-    }
 }
 
 int main(){
