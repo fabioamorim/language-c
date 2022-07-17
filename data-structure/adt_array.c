@@ -32,6 +32,10 @@
         if not found, reutnr an invalid index -1. As the name inform, it uses a binary search method.
     int RBinzarySearch(struct Array arr, int l, int h, int value) - this function is BinarySearch recursive version.
         is required pass low and high current index of array.
+    int GetByIndex(struct Array arr, int index) - return the value of array by index. To return if array is empty or
+    the index does not exist in array, return -999999999.
+    int GetByVAlue(Struct Array arr, int value) - return the index of array by value. For convinience, it's used 
+        LinearSearch to get the index.
 
 */
 
@@ -198,6 +202,10 @@ int GetByIndex(struct Array arr, int index){
     return -999999999; // return big negative integer if the index does not have value.
 }
 
+int GetByValue(struct Array arr, int value){
+    return LinearSearch(arr, value);
+}
+
 int main(){
 
     struct Array arr ={{},10,0};
@@ -214,7 +222,7 @@ int main(){
 
     printf("%d\n",BinarySearch(arr, 99));
     printf("%d\n", RBinarySearch(arr,0,arr.length,50));
-    printf("%d\n",GetByIndex(arr, 1000));
+    printf("%d\n",GetByValue(arr, 50));
 
     return 0;
 }
