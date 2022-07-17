@@ -40,6 +40,7 @@
     int Min(struct Array arr) - return the min vlaue in array.
     int Sum(struct Array arr) - return the sum of array values.
     int RSum(struct Array arr, int sum, int i) - this function is Sum recursive version.
+    void Reverse(struct Array *array) - invert the value of array.
 
 */
 
@@ -251,6 +252,15 @@ int RSum(struct Array arr, int sum, int i){
     return RSum(arr, sum, i-1);
 }
 
+void Reverse(struct Array *arr){
+
+    if(IsEmpty(*arr)==false){
+       for(int i=0, j=arr->length-1;i<j;i++,j--)
+           Swap(&arr->A[i], &arr->A[j]);
+       
+    }
+}
+
 int main(){
 
     struct Array arr ={{},10,0};
@@ -264,13 +274,8 @@ int main(){
     Display(arr);
     SimpleSort(&arr);
     Display(arr);
-
-    printf("%d\n",BinarySearch(arr, 99));
-    printf("%d\n", RBinarySearch(arr,0,arr.length,50));
-    printf("%d\n",GetByValue(arr, 50));
-    //printf("Max: %d\n",Max(arr));
-    //printf("Min: %d\n",Min(arr));
-    printf("Soma: %d", RSum(arr, 0, arr.length));
+    Reverse(&arr);
+    Display(arr);
 
     return 0;
 }
