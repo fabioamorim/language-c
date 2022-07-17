@@ -11,7 +11,7 @@
     Array structure:
     
     -Array space;
-    -Total sice;
+    -Total size;
     -Current lenght
 
     Functions:
