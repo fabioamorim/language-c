@@ -38,6 +38,8 @@
         LinearSearch to get the index.
     int Max(struct Array arr) - return the max value in array.
     int Min(struct Array arr) - return the min vlaue in array.
+    int Sum(struct Array arr) - return the sum of array values.
+    int RSum(struct Array arr, int sum, int i) - this function is Sum recursive version.
 
 */
 
@@ -232,11 +234,28 @@ int Min(struct Array arr){
     return min;
 }
 
+int Sum(struct Array arr){
+
+    int sum=0;
+
+    for(int i=0;i < arr.length; i++)
+        sum+= arr.A[i];
+
+    return sum;
+}
+
+int RSum(struct Array arr, int sum, int i){
+    
+    if(i<0) return sum;
+    sum+=arr.A[i];
+    return RSum(arr, sum, i-1);
+}
+
 int main(){
 
     struct Array arr ={{},10,0};
 
-    printf("%d\n",GetByIndex(arr, 1));
+    printf("%d\n",RSum(arr, 0, arr.length));
     Insert(&arr,0,99);
     Insert(&arr,1,88);
     Insert(&arr,2,100);
@@ -249,8 +268,9 @@ int main(){
     printf("%d\n",BinarySearch(arr, 99));
     printf("%d\n", RBinarySearch(arr,0,arr.length,50));
     printf("%d\n",GetByValue(arr, 50));
-    printf("Max: %d\n",Max(arr));
-    printf("Min: %d\n",Min(arr));
+    //printf("Max: %d\n",Max(arr));
+    //printf("Min: %d\n",Min(arr));
+    printf("Soma: %d", RSum(arr, 0, arr.length));
 
     return 0;
 }
