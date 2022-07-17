@@ -189,10 +189,20 @@ int RBinarySearch(struct Array arr, int l, int h, int value){
 
 }
 
+int GetByIndex(struct Array arr, int index){
+
+    if(IsEmpty(arr)) return -999999999; // return big negative integer if the array is empty.
+    if(index >= 0 && arr.length > index)
+        return arr.A[index];
+
+    return -999999999; // return big negative integer if the index does not have value.
+}
+
 int main(){
 
     struct Array arr ={{},10,0};
 
+    printf("%d\n",GetByIndex(arr, 1));
     Insert(&arr,0,99);
     Insert(&arr,1,88);
     Insert(&arr,2,100);
@@ -204,6 +214,7 @@ int main(){
 
     printf("%d\n",BinarySearch(arr, 99));
     printf("%d\n", RBinarySearch(arr,0,arr.length,50));
+    printf("%d\n",GetByIndex(arr, 1000));
 
     return 0;
 }
