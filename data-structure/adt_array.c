@@ -28,7 +28,7 @@
     int LinearSearch(struct Array arr, int value) - the function return the index if the value was found in array,
         if not found, return an invalid index -1.
     int RLinearSearch(struct Array arr, int value, int i) - this function is LinearSearch recursive version.
-    
+
 
 */
 
@@ -140,6 +140,22 @@ int RLinearSearch(struct Array arr, int value, int i){
     return -1;
 }
 
+int BinarySearch(struct Array arr, int value){
+
+    int h=arr.length;
+    int l=0;
+    int middle;
+
+    while(l<=h){
+        middle=(h+l)/2;
+        if(arr.A[middle]==value)return middle;
+        else if(arr.A[middle]>value) h=middle-1;
+        else l=middle+1;
+    }
+
+    return -1;
+}
+
 int main(){
 
     struct Array arr ={{},10,0};
@@ -153,8 +169,8 @@ int main(){
     SimpleSort(&arr);
     Display(arr);
 
-    printf("%d\n",LinearSearch(arr, 1000));
-    printf("%d\n", RLinearSearch(arr,99,arr.length));
+    printf("%d\n",BinarySearch(arr, 99));
+
 
     return 0;
 }
