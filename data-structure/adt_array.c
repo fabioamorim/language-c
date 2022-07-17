@@ -36,6 +36,8 @@
     the index does not exist in array, return -999999999.
     int GetByVAlue(Struct Array arr, int value) - return the index of array by value. For convinience, it's used 
         LinearSearch to get the index.
+    int Max(struct Array arr) - return the max value in array.
+    int Min(struct Array arr) - return the min vlaue in array.
 
 */
 
@@ -206,6 +208,30 @@ int GetByValue(struct Array arr, int value){
     return LinearSearch(arr, value);
 }
 
+int Max(struct Array arr){
+
+    if(arr.length == 0) return 0;
+
+    int max = arr.A[0];
+
+    for(int i=0;i<arr.length;i++)
+        if(arr.A[i] > max) max = arr.A[i];
+
+    return max;
+}
+
+int Min(struct Array arr){
+
+    if(arr.length == 0) return -999999999;
+
+    int min = arr.A[0];
+
+    for(int i=0;i < arr.length;i++)
+        if(arr.A[i] < min) min = arr.A[i];
+
+    return min;
+}
+
 int main(){
 
     struct Array arr ={{},10,0};
@@ -223,6 +249,8 @@ int main(){
     printf("%d\n",BinarySearch(arr, 99));
     printf("%d\n", RBinarySearch(arr,0,arr.length,50));
     printf("%d\n",GetByValue(arr, 50));
+    printf("Max: %d\n",Max(arr));
+    printf("Min: %d\n",Min(arr));
 
     return 0;
 }
