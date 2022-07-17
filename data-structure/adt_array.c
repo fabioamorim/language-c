@@ -25,6 +25,10 @@
     void Swap(int *x, int *y) - Change the value of x to y and vice versa.
     bool IsSorted(struct Array arr) - return true if array already sorted and false if is not.
     void SimpleSort(struct Array *arr) - if the array is not sorted, this sort. 
+    int LinearSearch(struct Array arr, int value) - the function return the index if the value was found in array,
+        if not found, return an invalid index -1.
+    int RLinearSearch(struct Array arr, int value, int i) - this function is LinearSearch recursive version.
+    
 
 */
 
@@ -127,6 +131,15 @@ int LinearSearch(struct Array arr, int value){
     return -1;
 }
 
+int RLinearSearch(struct Array arr, int value, int i){
+
+    if(IsEmpty(arr)==false)
+        if(value==arr.A[i]) return i;
+        else return RLinearSearch(arr, value, i-1);
+
+    return -1;
+}
+
 int main(){
 
     struct Array arr ={{},10,0};
@@ -141,6 +154,7 @@ int main(){
     Display(arr);
 
     printf("%d\n",LinearSearch(arr, 1000));
+    printf("%d\n", RLinearSearch(arr,99,arr.length));
 
     return 0;
 }
