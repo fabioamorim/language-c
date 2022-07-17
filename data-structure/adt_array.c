@@ -78,6 +78,14 @@ int Delete(struct Array *arr, int index){
     return -1;
 }
 
+void Swap(int *x, int *y){
+
+    int temp;
+    temp=*x;
+    *x=*y;
+    *y=temp;
+}
+
 bool IsSorted(struct Array arr){
     for(int i=0;i<arr.length-1;i++)
         if(arr.A[i]>arr.A[i+1]) return false;
@@ -99,11 +107,8 @@ void SimpleSort(struct Array *arr){
             for(int i=0;i<arr->length;i++){
 
                 for(int j=0;j<arr->length;j++){
-                    if(arr->A[i]<arr->A[j]){
-                        int temp=arr->A[i];
-                        arr->A[i]=arr->A[j];
-                        arr->A[j]=temp;
-                    }
+                    if(arr->A[i]<arr->A[j])
+                        Swap(&arr->A[i], &arr->A[j]);
                 }
             }
         }
