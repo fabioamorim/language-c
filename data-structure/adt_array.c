@@ -3,7 +3,6 @@
 #include <stdbool.h>
 
 /*
-
     Abstract Data Type - Array
 
     Is an Array implementation with functions:
@@ -41,6 +40,7 @@
     int Sum(struct Array arr) - return the sum of array values.
     int RSum(struct Array arr, int sum, int i) - this function is Sum recursive version.
     void Reverse(struct Array *array) - invert the value of array.
+    struct Array Merge(struct Array a, struct Array b) - Merge tha a and b array and return a new array.
 
 */
 
@@ -259,6 +259,33 @@ void Reverse(struct Array *arr){
            Swap(&arr->A[i], &arr->A[j]);
        
     }
+}
+
+struct Array Merge(struct Array a, struct Array b){
+    
+    /*
+        It will be merge array a and array b in a new array.
+        The required is the sum of a and b array should be the Array A[size].
+    */
+
+    struct Array c;
+
+    c.size = a.size;
+    c.length = a.length+b.length;
+
+    int k;
+
+    for(int i=0;i<a.length;i++){
+        c.A[i]=a.A[i];
+        k++;
+    }
+
+    for(int i=0;i<b.length;i++){
+        c.A[k]=b.A[i];
+        k++;
+    }
+    
+    return c;
 }
 
 int main(){
