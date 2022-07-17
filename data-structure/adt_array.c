@@ -16,12 +16,15 @@
 
     Functions:
 
-    bool IsEmpty(struct Array arr); - return true if array is empty and false is exists data. 
+    bool IsEmpty(struct Array arr) - return true if array is empty and false is exists data. 
     bool IsFull(struct Array arr) - return true if there is not space to add new data and false is exists space.
     void Display(strcut Array arr) - show all elements in array. 
     void Insert(struct Array *arr, int index, int value)- Add new value in array, passing the value and the index.
     void Delete(struct Arra *arr, int index) - Delete a value in array by index, return the value was removed, or
         return -1 if was not possible remove the value.
+    void Swap(int *x, int *y) - Change the value of x to y and vice versa.
+    bool IsSorted(struct Array arr) - return true if array already sorted and false if is not.
+    void SimpleSort(struct Array *arr) - if the array is not sorted, this sort. 
 
 */
 
@@ -115,6 +118,15 @@ void SimpleSort(struct Array *arr){
     }
 }
 
+int LinearSearch(struct Array arr, int value){
+
+    if(IsEmpty(arr)==false)
+        for(int i=0;i<arr.length;i++)
+            if(value==arr.A[i]) return i;
+    
+    return -1;
+}
+
 int main(){
 
     struct Array arr ={{},10,0};
@@ -127,6 +139,8 @@ int main(){
     Display(arr);
     SimpleSort(&arr);
     Display(arr);
+
+    printf("%d\n",LinearSearch(arr, 1000));
 
     return 0;
 }
