@@ -28,7 +28,10 @@
     int LinearSearch(struct Array arr, int value) - the function return the index if the value was found in array,
         if not found, return an invalid index -1.
     int RLinearSearch(struct Array arr, int value, int i) - this function is LinearSearch recursive version.
-
+    int BinarySearch(struct Array arr, int value) -  the function return the index if the value was found in arra,
+        if not found, reutnr an invalid index -1. As the name inform, it uses a binary search method.
+    int RBinzarySearch(struct Array arr, int l, int h, int value) - this function is BinarySearch recursive version.
+        is required pass low and high current index of array.
 
 */
 
@@ -142,6 +145,15 @@ int RLinearSearch(struct Array arr, int value, int i){
 
 int BinarySearch(struct Array arr, int value){
 
+    /*
+        Attention!
+        Binary search just work if array is sorted.
+        In this case, we will check if is sorted, depend the result, apply sort function. 
+    */
+
+    if(IsSorted(arr)==false)
+        SimpleSort(&arr);
+
     int h=arr.length;
     int l=0;
     int middle;
@@ -154,6 +166,27 @@ int BinarySearch(struct Array arr, int value){
     }
 
     return -1;
+}
+
+int RBinarySearch(struct Array arr, int l, int h, int value){
+
+    if(l>h) return -1;
+
+    /*
+        Attention!
+        Binary search just work if array is sorted.
+        In this case, we will check if is sorted, depend the result, apply sort function. 
+    */
+
+    if(IsSorted(arr)==false)
+        SimpleSort(&arr);
+
+    int middle = (h+l)/2;
+
+    if(arr.A[middle] == value) return middle;
+    else if(arr.A[middle]>value) return RBinarySearch(arr, l, middle-1, value);
+    else return RBinarySearch(arr, middle+1, h, value);
+
 }
 
 int main(){
@@ -170,7 +203,7 @@ int main(){
     Display(arr);
 
     printf("%d\n",BinarySearch(arr, 99));
-
+    printf("%d\n", RBinarySearch(arr,0,arr.length,50));
 
     return 0;
 }
