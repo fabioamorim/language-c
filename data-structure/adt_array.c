@@ -42,7 +42,8 @@
     int RSum(struct Array arr, int sum, int i) - this function is Sum recursive version.
     void Reverse(struct Array *array) - invert the value of array.
     struct Array Merge(struct Array a, struct Array b) - Merge tha a and b array and return a new array.
-
+    struct Array Union(struct Array a, struct Array b) - Union the a and b array and return a new array, without 
+        except equal numbers from both arrays. 
 */
 
 struct Array{
@@ -274,7 +275,6 @@ struct Array Merge(struct Array a, struct Array b){
     
     /*
         It will be merge array a and array b in a new array.
-        The required is the sum of a and b array should be the Array A[size].
     */
 
     struct Array aux;
@@ -289,12 +289,31 @@ struct Array Merge(struct Array a, struct Array b){
     return aux;
 }
 
+struct Array Union(struct Array a, struct Array b){
+
+    struct Array aux;
+
+    Initialize(&aux, (a.size+b.size));
+
+    for(int i=0;i<a.length;i++){
+        Insert(&aux,aux.length,a.A[i]);
+    }
+
+    for(int i=0;i<b.length;i++){
+        int j = LinearSearch(a, b.A[i]);
+        if(j==-1)
+            Insert(&aux,aux.length,b.A[i]);
+    }
+
+    return aux;
+
+}
+
 int main(){
 
     struct Array a;
-    struct Array b;
-
     Initialize(&a,5);
+    struct Array b;
     Initialize(&b,5);
 
     Insert(&a,a.length,33);
@@ -303,23 +322,28 @@ int main(){
     Insert(&a,a.length,1);
     Insert(&a,a.length,9);
 
-    Insert(&b,b.length,200);
+    Insert(&b,b.length,33);
     Insert(&b,b.length,82);
     Insert(&b,b.length,4);
     Insert(&b,b.length,2);
     Insert(&b,b.length,8);
-
-    Display(a);
-    Display(b);
 
     int size = a.size + b.size;
 
     struct Array c;
     Initialize(&c, size);
 
+    struct Array d;
+    Initialize(&d, (a.size+b.size));
+
     c=Merge(a,b);
+    d=Union(a,b);
+
+    SimpleSort(&c);
+    SimpleSort(&d);
 
     Display(c);
+    Display(d);
     
     return 0;
 }
