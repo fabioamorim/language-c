@@ -15,6 +15,7 @@
 
     Functions:
 
+    void Initialize(struct Array arr) - initialize the array structure.
     bool IsEmpty(struct Array arr) - return true if array is empty and false is exists data. 
     bool IsFull(struct Array arr) - return true if there is not space to add new data and false is exists space.
     void Display(strcut Array arr) - show all elements in array. 
@@ -45,10 +46,18 @@
 */
 
 struct Array{
-    int A[10];
+    int *A;
     int size;
     int length;
 };
+
+void Initialize(struct Array *arr, int size){
+    if(size > 0){
+        arr->A=(int *)malloc(size*sizeof(int));
+        arr->size=size;
+        arr->length=0;
+    }
+}
 
 bool IsEmpty(struct Array arr){
     if(arr.length>0) return false;
@@ -268,41 +277,49 @@ struct Array Merge(struct Array a, struct Array b){
         The required is the sum of a and b array should be the Array A[size].
     */
 
-    struct Array c;
+    struct Array aux;
+    Initialize(&aux, (a.size+b.size));
 
-    c.size = a.size;
-    c.length = a.length+b.length;
+    for(int i=0;i<a.length;i++)
+        Insert(&aux,aux.length,a.A[i]);
 
-    int k;
-
-    for(int i=0;i<a.length;i++){
-        c.A[i]=a.A[i];
-        k++;
-    }
-
-    for(int i=0;i<b.length;i++){
-        c.A[k]=b.A[i];
-        k++;
-    }
+    for(int i=0;i<b.length;i++)
+        Insert(&aux,aux.length,b.A[i]);
     
-    return c;
+    return aux;
 }
 
 int main(){
 
-    struct Array arr ={{},10,0};
+    struct Array a;
+    struct Array b;
 
-    printf("%d\n",RSum(arr, 0, arr.length));
-    Insert(&arr,0,99);
-    Insert(&arr,1,88);
-    Insert(&arr,2,100);
-    Insert(&arr,3,50);
-    Insert(&arr,4,22);
-    Display(arr);
-    SimpleSort(&arr);
-    Display(arr);
-    Reverse(&arr);
-    Display(arr);
+    Initialize(&a,5);
+    Initialize(&b,5);
 
+    Insert(&a,a.length,33);
+    Insert(&a,a.length,5);
+    Insert(&a,a.length,71);
+    Insert(&a,a.length,1);
+    Insert(&a,a.length,9);
+
+    Insert(&b,b.length,200);
+    Insert(&b,b.length,82);
+    Insert(&b,b.length,4);
+    Insert(&b,b.length,2);
+    Insert(&b,b.length,8);
+
+    Display(a);
+    Display(b);
+
+    int size = a.size + b.size;
+
+    struct Array c;
+    Initialize(&c, size);
+
+    c=Merge(a,b);
+
+    Display(c);
+    
     return 0;
 }
