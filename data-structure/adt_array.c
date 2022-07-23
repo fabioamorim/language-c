@@ -43,7 +43,8 @@
     void Reverse(struct Array *array) - invert the value of array.
     struct Array Merge(struct Array a, struct Array b) - Merge tha a and b array and return a new array.
     struct Array Union(struct Array a, struct Array b) - Union the a and b array and return a new array, without 
-        except equal numbers from both arrays. 
+        except equal numbers from both arrays.
+    struct Array Intersection(strcut Array a, struct Array b) - Only values are in both arrays will be copy to new array. 
 */
 
 struct Array{
@@ -303,6 +304,31 @@ struct Array Union(struct Array a, struct Array b){
         int j = LinearSearch(a, b.A[i]);
         if(j==-1)
             Insert(&aux,aux.length,b.A[i]);
+    }
+
+    return aux;
+
+}
+
+struct Array Intersection(struct Array a, struct Array b){
+
+    struct Array aux;
+    int max = 0;
+
+    if(a.size>b.size) max= a.size;
+    else if (a.size<b.size) max = b.size;
+    else max = a.size;
+
+    Initialize(&aux, (a.size+b.size));
+
+    int j=0;
+    for(int i=0;i<a.length;i++){
+        int test = BinarySearch(b,a.A[i]);
+        if (test!=-1){            
+           aux.A[j] = a.A[i];
+           j++;
+           aux.length++; 
+        } 
     }
 
     return aux;
